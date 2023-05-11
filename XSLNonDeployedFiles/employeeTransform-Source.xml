@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<getEmployeeByIdResponse xmlns="http://com.example.spring.soap.api">
+   <employeeInfo>
+      <employeeId>23</employeeId>
+      <name>Cesar Erives</name>
+      <department>department25</department>
+      <phone>phone26</phone>
+      <address>address27</address>
+   </employeeInfo>
+</getEmployeeByIdResponse>

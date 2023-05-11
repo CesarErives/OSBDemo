@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ns0:getEmployeeByIdResponse xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns0="http://com.example.spring.soap.api">
+   <ns0:employeeInfo>
+      <ns0:name>Hi there, Cesar Erives, have a great day!</ns0:name>
+   </ns0:employeeInfo>
+</ns0:getEmployeeByIdResponse>

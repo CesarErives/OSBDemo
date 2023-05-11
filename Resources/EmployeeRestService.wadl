@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<application xmlns:soa="http://www.oracle.com/soa/rest" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://com.example.spring.soap.api" xmlns="http://wadl.dev.java.net/2009/02">
+   <doc title="EmployeeRestService">RestService</doc>
+   <grammars>
+      <xs:schema xmlns:tns="http://com.example.spring.soap.api" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://com.example.spring.soap.api" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://com.example.spring.soap.api" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+
+	<xs:complexType name="employeeInfo">
+		<xs:sequence>
+			<xs:element name="employeeId" type="xs:long"/>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="department" type="xs:string"/>
+			<xs:element name="phone" type="xs:string"/>
+			<xs:element name="address" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serviceStatus">
+		<xs:sequence>
+			<xs:element name="status" type="xs:string"/>
+			<xs:element name="message" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="addEmployeeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeInfo" type="tns:employeeInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="addEmployeeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus"/>
+				<xs:element name="employeeInfo" type="tns:employeeInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getEmployeeByIdRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeId" type="xs:long"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getEmployeeByIdResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeInfo" type="tns:employeeInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="updateEmployeeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeInfo" type="tns:employeeInfo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="updateEmployeeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteEmployeeRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="employeeId" type="xs:long"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteEmployeeResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serviceStatus" type="tns:serviceStatus"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
+   </grammars>
+   <resources>
+      <resource path="/">
+         <method name="GET" soa:wsdlOperation="getEmployeeById">
+            <request soa:paramElement="pns:getEmployeeByIdRequest" xmlns:pns="http://com.example.spring.soap.api">
+               <param name="employeeId" style="query" soa:expression="$msg.getEmployeeByIdRequest/tns:employeeId" type="xsd:long"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:getEmployeeByIdResponse" xmlns:cns="http://com.example.spring.soap.api"/>
+               <representation mediaType="application/json" element="cns:getEmployeeByIdResponse" xmlns:cns="http://com.example.spring.soap.api"/>
+            </response>
+         </method>
+         <method name="DELETE" soa:wsdlOperation="deleteEmployee">
+            <request soa:paramElement="pns:deleteEmployeeRequest" xmlns:pns="http://com.example.spring.soap.api">
+               <param name="employeeId" style="query" soa:expression="$msg.deleteEmployeeRequest/tns:employeeId" type="xsd:long"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:deleteEmployeeResponse" xmlns:cns="http://com.example.spring.soap.api"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/update">
+         <method name="GET" soa:wsdlOperation="updateEmployee">
+            <request soa:paramElement="pns:updateEmployeeRequest" xmlns:pns="http://com.example.spring.soap.api">
+               <param name="employeeId" style="query" soa:expression="$msg.updateEmployeeRequest/tns:employeeInfo/tns:employeeId" type="xsd:long"/>
+               <param name="name" style="query" soa:expression="$msg.updateEmployeeRequest/tns:employeeInfo/tns:name" type="xsd:string"/>
+               <param name="department" style="query" soa:expression="$msg.updateEmployeeRequest/tns:employeeInfo/tns:department" type="xsd:string"/>
+               <param name="phone" style="query" soa:expression="$msg.updateEmployeeRequest/tns:employeeInfo/tns:phone" type="xsd:string"/>
+               <param name="address" style="query" soa:expression="$msg.updateEmployeeRequest/tns:employeeInfo/tns:address" type="xsd:string"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:updateEmployeeResponse" xmlns:cns="http://com.example.spring.soap.api"/>
+            </response>
+         </method>
+      </resource>
+      <resource path="/new">
+         <method name="GET" soa:wsdlOperation="addEmployee">
+            <request soa:paramElement="pns:addEmployeeRequest" xmlns:pns="http://com.example.spring.soap.api">
+               <param name="employeeId" style="query" soa:expression="$msg.addEmployeeRequest/tns:employeeInfo/tns:employeeId" type="xsd:long"/>
+               <param name="name" style="query" soa:expression="$msg.addEmployeeRequest/tns:employeeInfo/tns:name" type="xsd:string"/>
+               <param name="department" style="query" soa:expression="$msg.addEmployeeRequest/tns:employeeInfo/tns:department" type="xsd:string"/>
+               <param name="phone" style="query" soa:expression="$msg.addEmployeeRequest/tns:employeeInfo/tns:phone" type="xsd:string"/>
+               <param name="address" style="query" soa:expression="$msg.addEmployeeRequest/tns:employeeInfo/tns:address" type="xsd:string"/>
+            </request>
+            <response status="200">
+               <representation mediaType="application/xml" element="cns:addEmployeeResponse" xmlns:cns="http://com.example.spring.soap.api"/>
+            </response>
+         </method>
+      </resource>
+   </resources>
+</application>
